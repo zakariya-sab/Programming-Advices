@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
 using namespace std;
 
 class ClsPerson
@@ -12,6 +14,7 @@ private:
     string _Phone;
 
 public:
+    // constracuter:
     ClsPerson(string FirstName, string LastName, string Email, string Phone)
     {
         _FirstName = FirstName;
@@ -19,7 +22,7 @@ public:
         _Email = Email;
         _Phone = Phone;
     }
-    
+
     // property set & get
     void SetFirstName(string FirstName)
     {
@@ -29,8 +32,8 @@ public:
     {
         return _FirstName;
     }
-    __declspec(property(get = GetFirstName , put = SetFirstName)) string FirstName;
-   
+    // __declspec(property(get = GetFirstName, put = SetFirstName)) string FirstName;
+
     // property set & get
     void SetLastName(string LastName)
     {
@@ -40,8 +43,8 @@ public:
     {
         return _LastName;
     }
-    __declspec(property(get = GetLastName , put = SetLastName)) string LastName;
-   
+    // __declspec(property(get = GetLastName, put = SetLastName)) string LastName;
+
     // property set & get
     void SetEmail(string Email)
     {
@@ -51,8 +54,8 @@ public:
     {
         return _Email;
     }
-    __declspec(property(get = GetEmail , put = SetEmail)) string Email;
-   
+    // __declspec(property(get = GetEmail, put = SetEmail)) string Email;
+
     // property set & get
     void SetPhone(string Phone)
     {
@@ -62,6 +65,9 @@ public:
     {
         return _Phone;
     }
-    __declspec(property(get = GetPhone , put = SetPhone)) string Phone;
-
+    // __declspec(property(get = GetPhone, put = SetPhone)) string Phone;
+    string FullName()
+    {
+        return _FirstName + " " + _LastName;
+    }
 };
