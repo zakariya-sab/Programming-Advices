@@ -77,6 +77,30 @@ public:
 		return Number;
 	}
 
+	static short ReadShortNumber(string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		short Number;
+		while (!(cin >> Number))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+
+	static short ReadShortNumberBetween(short From, short To, string ErrorMessage = "Number is not within range, Enter again:\n")
+	{
+		int Number = ReadShortNumber();
+
+		while (!IsNumberBetween((short)Number, (short)From, To))
+		{
+			cout << ErrorMessage;
+			Number = ReadShortNumber();
+		}
+		return Number;
+	}
+
 	static double ReadFloatNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		float Number;
@@ -130,12 +154,13 @@ public:
 		return clsDate::IsValidDate(Date);
 	}
 
-	// we can use enum  : 
+	// we can use enum  :
 	// enum enValidationMode {
 	//	Any = 0,
 	//	Only_number = 1,
 	//	Only_number_and_letters = 2
 	//}
+
 	static string ReadString(bool only_number_and_letters = false, bool only_letters = false)
 	{
 		string S1 = "";
