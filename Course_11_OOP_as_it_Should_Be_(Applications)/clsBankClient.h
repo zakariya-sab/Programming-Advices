@@ -242,20 +242,20 @@ public:
 		return (!Client.IsEmpty());
 	}
 
-	void Print()
-	{
-		cout << "\nClient Card:";
-		cout << "\n___________________";
-		cout << "\nFirstName   : " << GetFirstName();
-		cout << "\nLastName    : " << GetLastName();
-		cout << "\nFull Name   : " << FullName();
-		cout << "\nEmail       : " << GetEmail();
-		cout << "\nPhone       : " << GetPhone();
-		cout << "\nAcc. Number : " << _AccountNumber;
-		cout << "\nPassword    : " << _PinCode;
-		cout << "\nBalance     : " << _AccountBalance;
-		cout << "\n___________________\n";
-	}
+	// void Print()
+	// {
+	// 	cout << "\nClient Card:";
+	// 	cout << "\n___________________";
+	// 	cout << "\nFirstName   : " << GetFirstName();
+	// 	cout << "\nLastName    : " << GetLastName();
+	// 	cout << "\nFull Name   : " << FullName();
+	// 	cout << "\nEmail       : " << GetEmail();
+	// 	cout << "\nPhone       : " << GetPhone();
+	// 	cout << "\nAcc. Number : " << _AccountNumber;
+	// 	cout << "\nPassword    : " << _PinCode;
+	// 	cout << "\nBalance     : " << _AccountBalance;
+	// 	cout << "\n___________________\n";
+	// }
 
 	bool MarkedForDeleted()
 	{
