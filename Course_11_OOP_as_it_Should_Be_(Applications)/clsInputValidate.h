@@ -60,6 +60,7 @@ public:
 		return false;
 	}
 
+// use always this function to communicate with UI
 	static int ReadIntNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		int Number;
