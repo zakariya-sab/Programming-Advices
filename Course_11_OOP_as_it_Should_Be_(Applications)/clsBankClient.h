@@ -15,7 +15,8 @@ private:
 	enum enMode
 	{
 		EmptyMode = 0,
-		UpdateMode = 1
+		UpdateMode = 1,
+		AddNewMode = 2 
 	};
 	enMode _Mode;
 	string _AccountNumber;
@@ -111,6 +112,21 @@ private:
 
 		_SaveClientDataToFiles(vClients);
 	}
+
+    void _AddDataLineToFile(string  stDataLine)
+    {
+        fstream MyFile;
+        MyFile.open("Clients.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+
+    }
 
 //
 public:
