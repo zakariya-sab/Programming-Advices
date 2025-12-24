@@ -22,6 +22,7 @@ private:
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
+	bool _MarkedForDelete = false ;
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Seperator = "#//#")
 	{
@@ -36,7 +37,7 @@ private:
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
 	}
 
-	static vector<clsBankClient> _LoadClientDataFormFile()
+	static vector<clsBankClient> _LoadClientsDataFromFile()
 	{
 
 		vector<clsBankClient> vClients;
@@ -74,7 +75,7 @@ private:
 		return ClientRecords;
 	}
 
-	static void _SaveClientDataToFiles(vector<clsBankClient> vClients)
+	static void _SaveClientsDataToFile(vector<clsBankClient> vClients)
 	{
 
 		fstream MyFile;
@@ -86,8 +87,11 @@ private:
 			string Line;
 			for (const clsBankClient &Client : vClients)
 			{
-				Line = _ConvertClientObjectToLine(Client);
-				MyFile << Line << endl;
+				if (Client._MarkedForDelete == false)
+				{
+					Line = _ConvertClientObjectToLine(Client);
+					MyFile << Line << endl;
+				}
 			}
 
 			MyFile.close();
@@ -98,7 +102,7 @@ private:
 	{
 
 		vector<clsBankClient> vClients;
-		vClients = _LoadClientDataFormFile();
+		vClients = _LoadClientsDataFromFile();
 
 		for (clsBankClient &C : vClients)
 		{
@@ -110,7 +114,7 @@ private:
 			}
 		}
 
-		_SaveClientDataToFiles(vClients);
+		_SaveClientsDataToFile(vClients);
 	}
 
 	void _AddDataLineToFile(string stDataLine)
@@ -141,6 +145,7 @@ public:
 		_AccountNumber = AccountNumber;
 		_PinCode = PinCode;
 		_AccountBalance = AccountBalance;
+		_MarkedForDelete = false;
 	};
 
 	bool IsEmpty()
@@ -178,7 +183,7 @@ public:
 
 		fstream MyFile;
 
-		MyFile.open("Client.txt", ios::in);
+		MyFile.open("Clients.txt", ios::in);
 
 		if (MyFile.is_open())
 		{
@@ -251,6 +256,11 @@ public:
 		cout << "\n___________________\n";
 	}
 
+	bool MarkedForDeleted()
+	{
+		return _MarkedForDelete;
+	}
+
 	enum enSaveResults
 	{
 		svFaildEmptyObject = 0,
@@ -297,6 +307,29 @@ public:
 		}
 		}
 	}
+
+	bool Delete()
+    {
+        vector <clsBankClient> _vClients;
+        _vClients = _LoadClientsDataFromFile();
+
+        for (clsBankClient& C : _vClients)
+        {
+            if (C.AccountNumber() == _AccountNumber)
+            {
+                C._MarkedForDelete = true;
+                break;
+            }
+
+        }
+
+        _SaveClientsDataToFile(_vClients);
+
+        *this = _GetEmptyClientObject();
+
+        return true;
+
+    }
 
 	static clsBankClient GetAddNewClientObject(string AccountNumber)
 	{
