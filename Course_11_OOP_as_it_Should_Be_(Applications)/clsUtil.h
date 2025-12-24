@@ -7,25 +7,29 @@ using namespace std;
 
 class clsUtil
 {
-   
+
 public:
-    enum enCharType {
-        SamallLetter = 1, CapitalLetter = 2,
-        Digit = 3, MixChars = 4, SpecialCharacter = 5
+    enum enCharType
+    {
+        SamallLetter = 1,
+        CapitalLetter = 2,
+        Digit = 3,
+        MixChars = 4,
+        SpecialCharacter = 5
     };
 
-    static void  Srand()
+    static void Srand()
     {
-        //Seeds the random number generator in C++, called only once
-        //srand((unsigned)time(NULL));
-        //deepseek version becouse i use vs code not visual studio
-        // Seeds the random number generator, called only once
+        // Seeds the random number generator in C++, called only once
+        // srand((unsigned)time(NULL));
+        // deepseek version becouse i use vs code not visual studio
+        //  Seeds the random number generator, called only once
         srand(static_cast<unsigned int>(time(nullptr)));
     }
 
-    static  int RandomNumber(int From, int To)
+    static int RandomNumber(int From, int To)
     {
-        //Function to generate a random number
+        // Function to generate a random number
         int randNum = rand() % (To - From + 1) + From;
         return randNum;
     }
@@ -33,12 +37,11 @@ public:
     static char GetRandomCharacter(enCharType CharType)
     {
 
-        //updated this method to accept mixchars
+        // updated this method to accept mixchars
         if (CharType == MixChars)
         {
-            //Capital/Samll/Digits only
+            // Capital/Samll/Digits only
             CharType = (enCharType)RandomNumber(1, 3);
-
         }
 
         switch (CharType)
@@ -64,7 +67,7 @@ public:
             return char(RandomNumber(48, 57));
             break;
         }
-    defualt:
+        defualt:
         {
             return char(RandomNumber(65, 90));
             break;
@@ -72,7 +75,7 @@ public:
         }
     }
 
-    static  string GenerateWord(enCharType CharType, short Length)
+    static string GenerateWord(enCharType CharType, short Length)
 
     {
         string Word;
@@ -82,27 +85,24 @@ public:
         {
 
             Word = Word + GetRandomCharacter(CharType);
-
         }
         return Word;
     }
 
-    static string  GenerateKey(enCharType CharType = CapitalLetter)
+    static string GenerateKey(enCharType CharType = CapitalLetter)
     {
 
         string Key = "";
-
 
         Key = GenerateWord(CharType, 4) + "-";
         Key = Key + GenerateWord(CharType, 4) + "-";
         Key = Key + GenerateWord(CharType, 4) + "-";
         Key = Key + GenerateWord(CharType, 4);
 
-
         return Key;
     }
 
-    static void GenerateKeys(short NumberOfKeys, enCharType CharType)
+    static void GenerateKeys(short NumberOfKeys, enCharType CharType = CapitalLetter)
     {
 
         for (int i = 1; i <= NumberOfKeys; i++)
@@ -111,7 +111,6 @@ public:
             cout << "Key [" << i << "] : ";
             cout << GenerateKey(CharType) << endl;
         }
-
     }
 
     static void FillArrayWithRandomNumbers(int arr[100], int arrLength, int From, int To)
@@ -124,7 +123,6 @@ public:
     {
         for (int i = 0; i < arrLength; i++)
             arr[i] = GenerateWord(CharType, Wordlength);
-
     }
 
     static void FillArrayWithRandomKeys(string arr[100], int arrLength, enCharType CharType)
@@ -133,7 +131,7 @@ public:
             arr[i] = GenerateKey(CharType);
     }
 
-    static  void Swap(int& A, int& B)
+    static void Swap(int &A, int &B)
     {
         int Temp;
 
@@ -141,8 +139,16 @@ public:
         A = B;
         B = Temp;
     }
+    static void Swap(float &A, float &B)
+    {
+        float Temp;
 
-    static  void Swap(double& A, double& B)
+        Temp = A;
+        A = B;
+        B = Temp;
+    }
+
+    static void Swap(double &A, double &B)
     {
         double Temp;
 
@@ -151,7 +157,7 @@ public:
         B = Temp;
     }
 
-    static  void Swap(bool& A, bool& B)
+    static void Swap(bool &A, bool &B)
     {
         bool Temp;
 
@@ -160,7 +166,7 @@ public:
         B = Temp;
     }
 
-    static  void Swap(char& A, char& B)
+    static void Swap(char &A, char &B)
     {
         char Temp;
 
@@ -169,7 +175,7 @@ public:
         B = Temp;
     }
 
-    static  void Swap(string& A, string& B)
+    static void Swap(string &A, string &B)
     {
         string Temp;
 
@@ -178,33 +184,46 @@ public:
         B = Temp;
     }
 
-    static  void Swap(clsDate& A, clsDate& B)
+    static void Swap(clsDate &A, clsDate &B)
     {
         clsDate::SwapDates(A, B);
-
     }
 
-    static  void ShuffleArray(int arr[100], int arrLength)
+    static void ShuffleArray(int arr[100], int arrLength)
     {
 
         for (int i = 0; i < arrLength; i++)
         {
             Swap(arr[RandomNumber(1, arrLength) - 1], arr[RandomNumber(1, arrLength) - 1]);
         }
-
     }
-    //this is a string !!
-    static  void ShuffleArray(string arr[100], int arrLength)
+    static void ShuffleArray(double arr[100], int arrLength)
     {
 
         for (int i = 0; i < arrLength; i++)
         {
             Swap(arr[RandomNumber(1, arrLength) - 1], arr[RandomNumber(1, arrLength) - 1]);
         }
+    }
+    static void ShuffleArray(float arr[100], int arrLength)
+    {
 
+        for (int i = 0; i < arrLength; i++)
+        {
+            Swap(arr[RandomNumber(1, arrLength) - 1], arr[RandomNumber(1, arrLength) - 1]);
+        }
+    }
+    // this is a string !!
+    static void ShuffleArray(string arr[100], int arrLength)
+    {
+
+        for (int i = 0; i < arrLength; i++)
+        {
+            Swap(arr[RandomNumber(1, arrLength) - 1], arr[RandomNumber(1, arrLength) - 1]);
+        }
     }
 
-    static string  Tabs(short NumberOfTabs)
+    static string Tabs(short NumberOfTabs)
     {
         string t = "";
 
@@ -214,35 +233,28 @@ public:
             cout << t;
         }
         return t;
-
     }
 
-    static string  EncryptText(string Text, short EncryptionKey)
+    static string EncryptText(string Text, short EncryptionKey)
     {
 
         for (int i = 0; i <= Text.length(); i++)
         {
 
             Text[i] = char((int)Text[i] + EncryptionKey);
-
         }
 
         return Text;
-
     }
 
-    static string  DecryptText(string Text, short EncryptionKey)
+    static string DecryptText(string Text, short EncryptionKey)
     {
 
         for (int i = 0; i <= Text.length(); i++)
         {
 
             Text[i] = char((int)Text[i] - EncryptionKey);
-
         }
         return Text;
-
     }
-
 };
-
