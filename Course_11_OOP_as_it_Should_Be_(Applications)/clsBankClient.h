@@ -22,7 +22,7 @@ private:
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
-	bool _MarkedForDelete = false ;
+	bool _MarkedForDelete = false;
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Seperator = "#//#")
 	{
@@ -130,6 +130,7 @@ private:
 			MyFile.close();
 		}
 	}
+
 	void _AddNew()
 	{
 
@@ -309,30 +310,48 @@ public:
 	}
 
 	bool Delete()
-    {
-        vector <clsBankClient> _vClients;
-        _vClients = _LoadClientsDataFromFile();
+	{
+		vector<clsBankClient> _vClients;
+		_vClients = _LoadClientsDataFromFile();
 
-        for (clsBankClient& C : _vClients)
-        {
-            if (C.AccountNumber() == _AccountNumber)
-            {
-                C._MarkedForDelete = true;
-                break;
-            }
+		for (clsBankClient &C : _vClients)
+		{
+			if (C.AccountNumber() == _AccountNumber)
+			{
+				C._MarkedForDelete = true;
+				break;
+			}
+		}
 
-        }
+		_SaveClientsDataToFile(_vClients);
 
-        _SaveClientsDataToFile(_vClients);
+		*this = _GetEmptyClientObject();
 
-        *this = _GetEmptyClientObject();
-
-        return true;
-
-    }
+		return true;
+	}
 
 	static clsBankClient GetAddNewClientObject(string AccountNumber)
 	{
 		return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
+	}
+
+	static vector<clsBankClient> GetClientsList()
+	{
+		return _LoadClientsDataFromFile();
+	}
+
+	static float GetTotalBalances()
+	{
+		vector<clsBankClient> vClients = clsBankClient::GetClientsList();
+
+		double TotalBalances = 0;
+
+		for (clsBankClient Client : vClients)
+		{
+
+			TotalBalances += Client.GetAccountBalance();
+		}
+
+		return TotalBalances;
 	}
 };
