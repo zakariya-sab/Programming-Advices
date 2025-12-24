@@ -209,6 +209,7 @@ public:
 		return _GetEmptyClientObject();
 	}
 
+
 	static bool IsClientExist(string AccountNumber)
 	{
 
