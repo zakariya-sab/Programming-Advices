@@ -125,6 +125,18 @@ public:
 		return Number;
 	}
 
+	static double ReadDblNumber(bool positive_number = false,string ErrorMessage = "Invalid Number, Enter again\n")
+	{
+		double Number;
+		while (!(cin >> Number) || Number < 0 )
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << ErrorMessage;
+		}
+		return Number;
+	}
+	
 	static double ReadDblNumber(string ErrorMessage = "Invalid Number, Enter again\n")
 	{
 		double Number;
