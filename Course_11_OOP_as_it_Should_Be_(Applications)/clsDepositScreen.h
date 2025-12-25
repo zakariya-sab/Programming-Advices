@@ -9,7 +9,6 @@ class clsDepositScreen : protected clsScreen
 {
 
 private:
-private:
     static void _PrintClient(clsBankClient Client)
     {
         cout << "\nClient Card:";
