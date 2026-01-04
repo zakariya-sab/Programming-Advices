@@ -18,9 +18,12 @@ int main()
 {
     // clsMainScreen::ShowMainMenue();
 
-    while ((4-2)%2==0/*don't use true hhh*/)
+    while (clsLoginScreen::ShowLoginScreen())
     {
-        clsLoginScreen::ShowLoginScreen();
+        //hi how are you fine 
+        //yes 
+        //by ...
+        //aaaa!!
     }
     // testD_affichage();
     system("pause>0");
