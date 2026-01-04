@@ -5,7 +5,7 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 
-class clsDeleteClientScreen :protected clsScreen
+class clsDeleteClientScreen : protected clsScreen
 {
 
 private:
@@ -27,43 +27,46 @@ private:
 public:
     static void ShowDeleteClientScreen()
     {
-
-        _DrawScreenHeader("\tDelete Client Screen");
-
-        string AccountNumber = "";
-
-        cout << "\nPlease Enter Account Number: ";
-        AccountNumber = clsInputValidate::ReadString(true);
-        while (!clsBankClient::IsClientExist(AccountNumber))
+        if (!CheckAccessRights(clsUser::enPermissions::pDeleteClient))
         {
-            cout << "\nAccount number is not found, choose another one: ";
-            //we can use it without true in argument but for more scurity .that what i think now !
-            AccountNumber = clsInputValidate::ReadString(true);
+            return;
         }
-
-        clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-        _PrintClient(Client1);
-
-        cout << "\nAre you sure you want to delete this client y/n? ";
-
-        char Answer = 'n';
-        cin >> Answer;
-
-        if (Answer == 'y' || Answer == 'Y')
+        else
         {
+            _DrawScreenHeader("\tDelete Client Screen");
 
+            string AccountNumber = "";
 
-            if (Client1.Delete())
+            cout << "\nPlease Enter Account Number: ";
+            AccountNumber = clsInputValidate::ReadString(true);
+            while (!clsBankClient::IsClientExist(AccountNumber))
             {
-                cout << "\nClient Deleted Successfully :-)\n";
-                _PrintClient(Client1);
+                cout << "\nAccount number is not found, choose another one: ";
+                // we can use it without true in argument but for more scurity .that what i think now !
+                AccountNumber = clsInputValidate::ReadString(true);
             }
-            else
+
+            clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+            _PrintClient(Client1);
+
+            cout << "\nAre you sure you want to delete this client y/n? ";
+
+            char Answer = 'n';
+            cin >> Answer;
+
+            if (Answer == 'y' || Answer == 'Y')
             {
-                cout << "\nError Client Was not Deleted\n";
+
+                if (Client1.Delete())
+                {
+                    cout << "\nClient Deleted Successfully :-)\n";
+                    _PrintClient(Client1);
+                }
+                else
+                {
+                    cout << "\nError Client Was not Deleted\n";
+                }
             }
         }
     }
-
 };
-

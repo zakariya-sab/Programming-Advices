@@ -373,6 +373,6 @@ public:
 			Save();
 			return true;
 		}
-		return false ; 
+		return false;
 	}
 };

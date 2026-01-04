@@ -5,11 +5,11 @@
 #include "clsBankClient.h"
 #include <iomanip>
 
-class clsClientListScreen:protected clsScreen
+class clsClientListScreen : protected clsScreen
 {
 
 private:
-   static void PrintClientRecordLine(clsBankClient Client)
+    static void PrintClientRecordLine(clsBankClient Client)
     {
 
         cout << setw(8) << left << "" << "| " << setw(15) << left << Client.AccountNumber();
@@ -18,50 +18,51 @@ private:
         cout << "| " << setw(35) << left << Client.GetEmail();
         cout << "| " << setw(10) << left << Client.GetPinCode();
         cout << "| " << setw(12) << left << Client.GetAccountBalance();
-
     }
 
 public:
-  
-
-   static void ShowClientsList()
+    static void ShowClientsList()
     {
-
-        
-        vector <clsBankClient> vClients = clsBankClient::GetClientsList();
-        string Title = "\t  Client List Screen";
-        string SubTitle ="\t    (" + to_string(vClients.size()) + ") Client(s).";
-
-        _DrawScreenHeader(Title, SubTitle);
-        
-
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________________________________________\n" << endl;
-
-        cout <<  setw(8) << left << "" << "| " << left << setw(15) << "Accout Number";
-        cout << "| " << left << setw(25) << "Client Name";
-        cout << "| " << left << setw(12) << "Phone";
-        cout << "| " << left << setw(35) << "Email";
-        cout << "| " << left << setw(10) << "Pin Code";
-        cout << "| " << left << setw(12) << "Balance";
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________________________________________\n" << endl;
-
-        if (vClients.size() == 0)
-            cout << "\t\t\t\tNo Clients Available In the System!";
+        if (!CheckAccessRights(clsUser::enPermissions::pListClients))
+        {
+            return;
+        }
         else
+        {
+            vector<clsBankClient> vClients = clsBankClient::GetClientsList();
+            string Title = "\t  Client List Screen";
+            string SubTitle = "\t    (" + to_string(vClients.size()) + ") Client(s).";
 
-            for (clsBankClient Client : vClients)
-            {
+            _DrawScreenHeader(Title, SubTitle);
 
-                PrintClientRecordLine(Client);
-                cout << endl;
-            }
+            cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+            cout << "_________________________________________________________________________\n"
+                 << endl;
 
-        cout << setw(8) << left << "" << "\n\t_______________________________________________________";
-        cout << "_________________________________________________________________________\n" << endl;
+            cout << setw(8) << left << "" << "| " << left << setw(15) << "Accout Number";
+            cout << "| " << left << setw(25) << "Client Name";
+            cout << "| " << left << setw(12) << "Phone";
+            cout << "| " << left << setw(35) << "Email";
+            cout << "| " << left << setw(10) << "Pin Code";
+            cout << "| " << left << setw(12) << "Balance";
+            cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+            cout << "_________________________________________________________________________\n"
+                 << endl;
 
+            if (vClients.size() == 0)
+                cout << "\t\t\t\tNo Clients Available In the System!";
+            else
+
+                for (clsBankClient Client : vClients)
+                {
+
+                    PrintClientRecordLine(Client);
+                    cout << endl;
+                }
+
+            cout << setw(8) << left << "" << "\n\t_______________________________________________________";
+            cout << "_________________________________________________________________________\n"
+                 << endl;
+        }
     }
-
 };
-

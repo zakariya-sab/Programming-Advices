@@ -48,45 +48,51 @@ private:
 public:
     static void ShowAddNewClientScreen()
     {
-
-        _DrawScreenHeader("\t  Add New Client Screen");
-
-        string AccountNumber = "";
-
-        cout << "\nPlease Enter Account Number: ";
-        AccountNumber = clsInputValidate::ReadString(true);
-        while (clsBankClient::IsClientExist(AccountNumber))
+        if (!CheckAccessRights(clsUser::enPermissions::pAddNewClient))
         {
-            cout << "\nAccount Number Is Already Used, Choose another one: ";
+            return;
+        }
+        else
+        {
+            _DrawScreenHeader("\t  Add New Client Screen");
+
+            string AccountNumber = "";
+
+            cout << "\nPlease Enter Account Number: ";
             AccountNumber = clsInputValidate::ReadString(true);
-        }
+            while (clsBankClient::IsClientExist(AccountNumber))
+            {
+                cout << "\nAccount Number Is Already Used, Choose another one: ";
+                AccountNumber = clsInputValidate::ReadString(true);
+            }
 
-        clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
+            clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
 
-        _ReadClientInfo(NewClient);
+            _ReadClientInfo(NewClient);
 
-        clsBankClient::enSaveResults SaveResult;
+            clsBankClient::enSaveResults SaveResult;
 
-        SaveResult = NewClient.Save();
+            SaveResult = NewClient.Save();
 
-        switch (SaveResult)
-        {
-        case clsBankClient::enSaveResults::svSucceeded:
-        {
-            cout << "\nAccount Addeded Successfully :-)\n";
-            _PrintClient(NewClient);
-            break;
-        }
-        case clsBankClient::enSaveResults::svFaildEmptyObject:
-        {
-            cout << "\nError account was not saved because it's Empty";
-            break;
-        }
-        case clsBankClient::enSaveResults::svFaildAccountNumberExists:
-        {
-            cout << "\nError account was not saved because account number is used!\n";
-            break;
-        }
+            switch (SaveResult)
+            {
+            case clsBankClient::enSaveResults::svSucceeded:
+            {
+                cout << "\nAccount Addeded Successfully :-)\n";
+                _PrintClient(NewClient);
+                break;
+            }
+            case clsBankClient::enSaveResults::svFaildEmptyObject:
+            {
+                cout << "\nError account was not saved because it's Empty";
+                break;
+            }
+            case clsBankClient::enSaveResults::svFaildAccountNumberExists:
+            {
+                cout << "\nError account was not saved because account number is used!\n";
+                break;
+            }
+            }
         }
     }
 };

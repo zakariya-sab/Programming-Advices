@@ -2,21 +2,23 @@
 #include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
-#include"clsDepositScreen.h"
-#include"clsWithdrawScreen.h"
-#include"clsTotalBalancesScreen.h"
+#include "clsDepositScreen.h"
+#include "clsWithdrawScreen.h"
+#include "clsTotalBalancesScreen.h"
 #include <iomanip>
 
 using namespace std;
 
-class clsTransactionsScreen :protected clsScreen
+class clsTransactionsScreen : protected clsScreen
 {
 
-
 private:
-    enum enTransactionsMenueOptions {
-        eDeposit = 1, eWithdraw = 2,
-        eShowTotalBalance = 3, eShowMainMenue = 4
+    enum enTransactionsMenueOptions
+    {
+        eDeposit = 1,
+        eWithdraw = 2,
+        eShowTotalBalance = 3,
+        eShowMainMenue = 4
     };
 
     static short ReadTransactionsMenueOption()
@@ -26,10 +28,9 @@ private:
         return Choice;
     }
 
-
     static void _ShowDepositScreen()
     {
-        //cout << "\n Deposit Screen will be here.\n";
+        // cout << "\n Deposit Screen will be here.\n";
         clsDepositScreen::ShowDepositScreen();
     }
 
@@ -41,7 +42,7 @@ private:
 
     static void _ShowTotalBalancesScreen()
     {
-        //cout << "\n Balances Screen will be here.\n";
+        // cout << "\n Balances Screen will be here.\n";
         clsTotalBalancesScreen::ShowTotalBalances();
     }
 
@@ -50,12 +51,11 @@ private:
         cout << "\n\nPress any key to go back to Transactions Menue...";
         system("pause>0");
         ShowTransactionsMenue();
-
     }
 
     static void _PerformTransactionsMenueOption(enTransactionsMenueOptions TransactionsMenueOption)
     {
-        //you can write system("cls")  and _GoBackToTransactionsMenue(); in the bignning and the end of the switch case instde of repitation 
+        // you can write system("cls")  and _GoBackToTransactionsMenue(); in the bignning and the end of the switch case instde of repitation
         switch (TransactionsMenueOption)
         {
         case enTransactionsMenueOptions::eDeposit:
@@ -84,36 +84,34 @@ private:
 
         case enTransactionsMenueOptions::eShowMainMenue:
         {
-            //do nothing here the main screen will handle it 
+            // do nothing here the main screen will handle it
         }
         }
-
-
     }
 
-
-
 public:
-
-
     static void ShowTransactionsMenue()
     {
 
+        if (!CheckAccessRights(clsUser::enPermissions::pTranactions))
+        {
+            return;
+        }
+        else
+        {
+            system("cls");
+            _DrawScreenHeader("\t  Transactions Screen");
 
-        system("cls");
-        _DrawScreenHeader("\t  Transactions Screen");
+            cout << setw(37) << left << "" << "===========================================\n";
+            cout << setw(37) << left << "" << "\t\t  Transactions Menue\n";
+            cout << setw(37) << left << "" << "===========================================\n";
+            cout << setw(37) << left << "" << "\t[1] Deposit.\n";
+            cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
+            cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
+            cout << setw(37) << left << "" << "\t[4] Main Menue.\n";
+            cout << setw(37) << left << "" << "===========================================\n";
 
-        cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t\t  Transactions Menue\n";
-        cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t[1] Deposit.\n";
-        cout << setw(37) << left << "" << "\t[2] Withdraw.\n";
-        cout << setw(37) << left << "" << "\t[3] Total Balances.\n";
-        cout << setw(37) << left << "" << "\t[4] Main Menue.\n";
-        cout << setw(37) << left << "" << "===========================================\n";
-
-        _PerformTransactionsMenueOption((enTransactionsMenueOptions)ReadTransactionsMenueOption());
+            _PerformTransactionsMenueOption((enTransactionsMenueOptions)ReadTransactionsMenueOption());
+        }
     }
-
 };
-
