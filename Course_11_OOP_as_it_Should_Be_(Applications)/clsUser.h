@@ -335,4 +335,20 @@ public:
     {
         return _LoadUsersDataFromFile();
     }
+
+    bool CheckAccessPermission(enPermissions Permissions)
+    {
+        if (this->_Permissions == enPermissions::eAll)
+        {
+            return true;
+        }
+        if ((Permissions & this->_Permissions) == Permissions)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
