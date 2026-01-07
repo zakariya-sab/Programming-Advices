@@ -6,6 +6,8 @@
 #include <vector>
 #include <fstream>
 #include "Global.h"
+#include "Global2.h"
+#include "clsUtil.h"
 // this file contain all client
 // const string Client_file = "Clients.txt";
 
@@ -29,7 +31,7 @@ private:
 	{
 
 		vector<string> Client = clsString::Split(Line, Seperator);
-		return clsBankClient(enMode::UpdateMode, Client[0], Client[1], Client[2], Client[3], Client[4], Client[5], stod(Client[6]));
+		return clsBankClient(enMode::UpdateMode, Client[0], Client[1], Client[2], Client[3], Client[4], clsUtil::DecryptText(Client[5], EncryptionKey), stod(Client[6]));
 	}
 
 	static clsBankClient _GetEmptyClientObject()
@@ -70,7 +72,7 @@ private:
 		ClientRecords += Client.GetEmail() + Seperator;
 		ClientRecords += Client.GetPhone() + Seperator;
 		ClientRecords += Client.AccountNumber() + Seperator;
-		ClientRecords += Client.GetPinCode() + Seperator;
+		ClientRecords += clsUtil::EncryptText(Client.GetPinCode(), EncryptionKey) + Seperator;
 		ClientRecords += to_string(Client._AccountBalance) + Seperator;
 
 		return ClientRecords;
@@ -198,6 +200,7 @@ public:
 
 	string GetPinCode()
 	{
+
 		return _PinCode;
 	}
 
