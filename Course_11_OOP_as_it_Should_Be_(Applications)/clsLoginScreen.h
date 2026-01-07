@@ -27,7 +27,7 @@ private:
                 cout << "\nYou have " << number_of_trials << "Trails to login.\n\n";
                 if (number_of_trials == 0)
                 {
-                    number_of_trials = 3 ;
+                    number_of_trials = 3;
                     cout << "\nYou are locked after " << number_of_trials << " Faild Trails.\n\n";
                     return false;
                 }
@@ -46,9 +46,9 @@ private:
             LoginFaild = CurrentUser.IsEmpty();
 
         } while (LoginFaild);
-
+        CurrentUser.RegisterLogIn();
         clsMainScreen::ShowMainMenue();
-        return true ;
+        return true;
     }
 
 public:
@@ -56,6 +56,6 @@ public:
     {
         system("cls");
         _DrawScreenHeader("\t  Login Screen");
-        return  _Login();
+        return _Login();
     }
 };
