@@ -153,6 +153,15 @@ public:
 
     };
     //
+      string _PrepareLogInRecord(string Seperator = "#//#")
+    {
+        string LoginRecord = "";
+        LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        LoginRecord += GetUserName() + Seperator;
+        LoginRecord += GetPassword() + Seperator;
+        LoginRecord += to_string(GetPermissions());
+        return LoginRecord;
+    }
     struct stLoginRegisterRecord;
     static stLoginRegisterRecord _ConvertLoginRegisterLineToRecord(string Line, string Seperator = "#//#")
     {
@@ -166,15 +175,7 @@ public:
 
         return LoginRegisterRecord;
     }
-    string _PrepareLogInRecord(string Seperator = "#//#")
-    {
-        string LoginRecord = "";
-        LoginRecord += clsDate::GetSystemDateTimeString() + Seperator;
-        LoginRecord += GetUserName() + Seperator;
-        LoginRecord += GetPassword() + Seperator;
-        LoginRecord += to_string(GetPermissions());
-        return LoginRecord;
-    }
+  
 
     //                      
     //
