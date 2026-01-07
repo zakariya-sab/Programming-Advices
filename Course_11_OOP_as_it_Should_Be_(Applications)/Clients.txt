@@ -1,7 +1,7 @@
 Oussama#//#Yaodane#//#oussama.yaodane@gmail.com#//#0612345678#//#OY01#//#1234#//#50.000000#//#
-Ilyass#//#Skiriba#//#Ilyass.skiriba@gmail.com#//#0623456789#//#IS02#//#1234#//#145.000000#//#
+Ilyass#//#Skiriba#//#Ilyass.skiriba@gmail.com#//#0623456789#//#IS02#//#1234#//#45.000000#//#
 Nasreddine#//#El Gourji#//#nasreddine.elgourji@gmail.com#//#0634567890#//#NG03#//#1234#//#60.000000#//#
-Nour#//#El Iamani#//#nour.eliamani@gmail.com#//#0645678901#//#NE04#//#1234#//#99.000000#//#
+Nour#//#El Iamani#//#nour.eliamani@gmail.com#//#0645678901#//#NE04#//#1234#//#0.010000#//#
 Aya#//#Benjelloun#//#aya.benjelloun@gmail.com#//#0656789012#//#AB05#//#1234#//#99.000000#//#
 Hamza#//#Gougasse#//#hamza.gougasse@gmail.com#//#0667890123#//#HG06#//#1234#//#52.000000#//#
 Mohamed#//#Kkanti#//#mohamed.kkanti@gmail.com#//#0678901234#//#MK07#//#1234#//#47.000000#//#
@@ -20,7 +20,7 @@ Malek#//#Awlaqi#//#malek.awlaqi@gmail.com#//#0621223344#//#MA19#//#1234#//#8.000
 Amin#//#El Kalai#//#mohamed.elkalai@gmail.com#//#0622334455#//#MK20#//#1234#//#61.000000#//#
 Youssef#//#Ait Aadi#//#youssef.aitaadi@gmail.com#//#0623445566#//#YA21#//#1234#//#0.000000#//#
 Salma#//#Bellaou#//#salma.bellaou@gmail.com#//#0624556677#//#SB22#//#1234#//#54.000000#//#
-Zakariya#//#Sabri#//#zakariya.sabri@gmail.com#//#06235888878#//#A71A#//#1234#//#190400.000000#//#
+Zakariya#//#Sabri#//#zakariya.sabri@gmail.com#//#06235888878#//#A71A#//#1234#//#199508.984375#//#
 Omar#//#Ait Said#//#omar.aitsaid@gmail.com#//#0627889900#//#OA25#//#1234#//#59.000000#//#
 Asma#//#Khamri#//#asma.khamri@gmail.com#//#0628990011#//#AK26#//#1234#//#1.000000#//#
 Youssef#//#Aouzah#//#youssef.aouzah@gmail.com#//#0630112233#//#YA27#//#1234#//#0.000000#//#

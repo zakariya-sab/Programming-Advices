@@ -5,6 +5,7 @@
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+#include "Global.h"
 // this file contain all client
 // const string Client_file = "Clients.txt";
 
@@ -137,7 +138,38 @@ private:
 		_AddDataLineToFile(_ConvertClientObjectToLine(*this));
 	}
 
+	string _PrepareTransferLogRecord(clsBankClient &DestinationClient, float amount, string UserName = CurrentUser.GetUserName(), string Seperator = "#//#")
+	{
+		// to use less memori we take the refrences &
+		string TransferLogRecord = "";
+		TransferLogRecord += clsDate::GetSystemDateTimeString() + Seperator;
+		TransferLogRecord += _AccountNumber + Seperator;
+		TransferLogRecord += DestinationClient.AccountNumber() + Seperator;
+		TransferLogRecord += to_string(amount) + Seperator;
+		TransferLogRecord += to_string(_AccountBalance) + Seperator;
+		TransferLogRecord += to_string(DestinationClient.GetAccountBalance()) + Seperator;
+		TransferLogRecord += CurrentUser.GetUserName();
+		return TransferLogRecord;
+	}
+
+	void _RegisterTransferLog(float amount, clsBankClient &DestinationClient, string UserName = CurrentUser.GetUserName())
+	{
+
+		string stDataLine = _PrepareTransferLogRecord(DestinationClient, amount, UserName);
+
+		fstream MyFile;
+		MyFile.open("TransferLog.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+
+			MyFile << stDataLine << endl;
+
+			MyFile.close();
+		}
+	}
 	//
+
 public:
 	clsBankClient(enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, float AccountBalance)
 		: clsPerson(FirstName, LastName, Email, Phone)
@@ -385,6 +417,8 @@ public:
 
 		Withdraw(Amount);
 		DestinationClient.Deposit(Amount);
+		_RegisterTransferLog(Amount, DestinationClient, CurrentUser.GetUserName());
 		return true;
 	}
+	//
 };
