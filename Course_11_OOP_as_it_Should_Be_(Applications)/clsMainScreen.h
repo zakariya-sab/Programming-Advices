@@ -10,7 +10,7 @@
 #include "clsTransactionsScreen.h"
 #include "clsManageUsers.h"
 #include <iomanip>
-#include "clsRegisterScreen.h"
+#include "clsLoginRegisterScreen.h"
 #include "Global.h"
 
 using namespace std;
@@ -28,7 +28,7 @@ private:
         eFindClient = 5,
         eShowTransactionsMenue = 6,
         eManageUsers = 7,
-        eShowLoginRegister = 8,
+        eLoginRegister = 8,
         eExit = 9
     };
 
@@ -90,9 +90,10 @@ private:
         clsManageUsersScreen::ShowManageUsersMenue();
     }
 
-    static void _ShowLoginRegister()
+    static void _ShowLoginRegisterScreen()
     {
-        cout << "\n\t\tThe login register will be here !!!!!!!!!!!!!!\n";
+        //cout << "\n\t\tThe login register will be here !!!!!!!!!!!!!!\n";
+        clsLoginRegisterScreen::ShowLoginRegisterScreen();
     }
 
     // static void _ShowEndScreen()
@@ -153,9 +154,9 @@ private:
             _ShowManageUsersMenue();
             _GoBackToMainMenue();
             break;
-        case enMainMenueOptions::eShowLoginRegister:
+        case enMainMenueOptions::eLoginRegister:
             system("cls");
-            _ShowLoginRegister();
+            _ShowLoginRegisterScreen();
             _GoBackToMainMenue();
             break;
 
