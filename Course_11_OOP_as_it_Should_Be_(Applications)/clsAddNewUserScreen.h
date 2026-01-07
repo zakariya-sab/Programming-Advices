@@ -113,6 +113,12 @@ private:
         {
             Permissions += clsUser::enPermissions::pManageUsers;
         }
+        cout << "\nRecord list? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions += clsUser::enPermissions::pListLoginRigester;
+        }
 
         return Permissions;
 

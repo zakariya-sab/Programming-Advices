@@ -149,6 +149,7 @@ public:
         pFindClient = 16,
         pTranactions = 32,
         pManageUsers = 64,
+        pListLoginRigester = 128,
 
     };
     //

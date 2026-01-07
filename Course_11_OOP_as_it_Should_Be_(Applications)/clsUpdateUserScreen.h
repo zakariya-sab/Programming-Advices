@@ -5,13 +5,11 @@
 #include "clsUser.h"
 #include "clsInputValidate.h"
 
-class clsUpdateUserScreen :protected clsScreen
+class clsUpdateUserScreen : protected clsScreen
 
 {
 private:
-
-
-    static void _ReadUserInfo(clsUser& User)
+    static void _ReadUserInfo(clsUser &User)
     {
         cout << "\nEnter FirstName: ";
         User.SetFirstName(clsInputValidate::ReadString());
@@ -32,7 +30,6 @@ private:
         User.SetPermissions(_ReadPermissionsToSet());
     }
 
-   
     static void _PrintUser(clsUser User)
     {
         cout << "\nUser Card:";
@@ -46,7 +43,6 @@ private:
         cout << "\nPassword    : " << User.GetPassword();
         cout << "\nPermissions : " << User.GetPermissions();
         cout << "\n___________________\n";
-
     }
 
     static int _ReadPermissionsToSet()
@@ -54,7 +50,6 @@ private:
 
         int Permissions = 0;
         char Answer = 'n';
-
 
         cout << "\nDo you want to give full access? y/n? ";
         cin >> Answer;
@@ -69,7 +64,6 @@ private:
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-
 
             Permissions += clsUser::enPermissions::pListClients;
         }
@@ -115,13 +109,17 @@ private:
         {
             Permissions += clsUser::enPermissions::pManageUsers;
         }
+        cout << "\nlogain Register List? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions += clsUser::enPermissions::pListLoginRigester;
+        }
 
         return Permissions;
-
     }
 
 public:
-
     static void ShowUpdateUserScreen()
     {
 
@@ -143,9 +141,9 @@ public:
         _PrintUser(User1);
 
         cout << "\nAre you sure you want to update this User y/n? ";
-        //i need to do a test here if the value good to avoid the problem in termianl !!
+        // i need to do a test here if the value good to avoid the problem in termianl !!
         char Answer = 'n';
-        //here:
+        // here:
         cin >> Answer;
 
         if (Answer == 'y' || Answer == 'Y')
@@ -153,7 +151,6 @@ public:
 
             cout << "\n\nUpdate User Info:";
             cout << "\n____________________\n";
-
 
             _ReadUserInfo(User1);
 
@@ -163,8 +160,12 @@ public:
 
             switch (SaveResult)
             {
-            case  clsUser::enSaveResults::svSucceeded:
+            case clsUser::enSaveResults::svSucceeded:
             {
+                if (CurrentUser.GetUserName() == User1.GetUserName())
+                {
+                    cout << "\t\tTo see the change, you need to log out. ";
+                }
                 cout << "\nUser Updated Successfully :-)\n";
 
                 _PrintUser(User1);
@@ -174,13 +175,8 @@ public:
             {
                 cout << "\nError User was not saved because it's Empty";
                 break;
-
             }
-
             }
-
         }
-
     }
 };
-
