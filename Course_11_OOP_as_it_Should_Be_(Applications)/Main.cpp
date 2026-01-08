@@ -3,16 +3,6 @@
 //  like : system("cls");
 // also it depande on your machine
 #include "clsLoginScreen.h"
-void testD_affichage()
-{
-    cout << "-------------------------------------------------------" << endl;
-    cout << "the curent  user name   : " << CurrentUser.GetUserName() << endl;
-    cout << "the curent  first name  : " << CurrentUser.GetFirstName() << endl;
-    cout << "the curent  last name   : " << CurrentUser.GetLastName() << endl;
-    cout << "the curent  Password    : " << CurrentUser.GetPassword() << endl;
-    cout << "the curent  Permissions : " << CurrentUser.GetPermissions() << endl;
-    cout << "-------------------------------------------------------" << endl;
-}
 int main()
 
 {
@@ -25,7 +15,6 @@ int main()
             break;
         }
     }
-    // testD_affichage();
     system("pause>0");
     return 0;
 }
